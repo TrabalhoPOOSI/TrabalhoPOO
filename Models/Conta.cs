@@ -18,6 +18,11 @@ namespace Trabalho_POO.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+
+        [Required]
+        public DateTime lançamento { get; set; }
+        public DateOnly vencimento { get; set; }
+
         public Cliente_ cliente { get; set; }
 
         public string clienteId { get; set; }
@@ -36,10 +41,12 @@ namespace Trabalho_POO.Models
         public decimal Total { get; set; }
         public Tipo_Consumidor tipo { get; set; }
         public StatusConta status { get; set; }
-        public Conta(double consumo)
+        public Conta(double consumo,DateOnly venc)
         {
             Consumo = consumo;
             status = StatusConta.EmAberto;
+            lançamento = DateTime.Now;
+            vencimento = venc;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Trabalho_POO.Models
         [Required]
         public TipoContaEnergia TipoConta { get; set; }
 
-        public ContaLuz( double consumo) : base(consumo)
+        public ContaLuz( double consumo, DateOnly vencimento) : base(consumo, vencimento)
         {
 
         }

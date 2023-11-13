@@ -50,8 +50,10 @@ public static class Principal
             string nome = Console.ReadLine();
             Console.WriteLine("Digite o CPF/CNPJ do cliente:");
             string ID = Console.ReadLine();
+            Console.WriteLine("informe a Senha:");
+            string ps = Console.ReadLine();
 
-            Cliente_ novoCliente = new Cliente_(nome, ID);
+            Cliente_ novoCliente = new Cliente_(nome, ID,ps);
 
             db.Add(novoCliente);
             db.SaveChanges();
@@ -83,8 +85,10 @@ public static class Principal
             double consumoAgua = double.Parse(Console.ReadLine());
             Console.WriteLine("Informe o consumo de esgoto da conta:");
             double consumoEsgoto = double.Parse(Console.ReadLine());
+            Console.WriteLine("informe a data de vencimento: (dd/mm/yyyy)");
+            DateOnly dateOnly = DateOnly.Parse(Console.ReadLine());
 
-            ContaAgua conta = new ContaAgua(consumoAgua, consumoEsgoto);
+            ContaAgua conta = new ContaAgua(consumoAgua, consumoEsgoto,dateOnly);
             conta.cliente= novoCliente;
             
            client.contas.Add(conta);

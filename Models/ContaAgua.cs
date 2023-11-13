@@ -12,7 +12,7 @@ namespace Trabalho_POO.Models
     {
         public string tarifaEsgoto { get; set; }
         public double consumoEsgoto { get; set; }
-        public ContaAgua(double consumo, double consumoEsgoto) : base(consumo)
+        public ContaAgua(double consumo, double consumoEsgoto, DateOnly vencimento) : base(consumo, vencimento)
         {
             this.tarifa = TarifaAgua().ToString(" F2");
             this.tarifaEsgoto = TarifaEsgoto().ToString("F2");
