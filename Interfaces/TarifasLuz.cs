@@ -9,5 +9,7 @@ namespace Trabalho_POO.Interfaces
     interface TarifasLuz
     {
         public double TarifaLuz();
+        public double ContribuiçãoPublica();
+        public double Imposto();
     }
 }

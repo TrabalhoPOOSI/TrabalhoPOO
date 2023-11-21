@@ -28,9 +28,10 @@ public static class Principal
                 Servicos.CriarContaAgua(user);
                 break;
             case "2":
+                Servicos.CriarContaLuz(user);
                 break;
             case "3":
-                ConsultarContas(user);
+                Servicos.ConsultarContas(user);
                 break;
             case "4":
                 ConsultarClientes(user);
@@ -44,39 +45,6 @@ public static class Principal
         }
     }
 
-    static void ConsultarContas(Cliente_ user)
-    {
-        Console.WriteLine("Escolha a opção desejada:");
-        Console.WriteLine("[a] Contas de agua lançadas;");
-        Console.WriteLine("[b] Contas de luz lançadas;");
-        Console.WriteLine("[c] Todas as contas lançadas;");
-        char resp = char.Parse(Console.ReadLine());
-        switch (resp)
-        {
-            case 'a':
-                using (var db = new ProjetoDbContext())
-                {
-                    var contasLançadas = db.ContaAgua.Where(c=>c.clienteId == user.Id).ToList();
-                    Console.WriteLine($"Contas lançadas para o usuario {user.Nome}:");
-                    Console.WriteLine(" ID |      Lançamentos    |  Status  | Tarifa |  Consumo (L) | Total ");
-                    foreach (var item in contasLançadas)
-                    {
-        
-                        Console.WriteLine($"  {item.Id} | {item.lançamento} | { item.status.ToString()} |  {item.tarifa} | " +
-                            $"   {item.Consumo}   | R$ {item.Total} ");
-                    }
-
-                }
-
-        break;
-            case 'b':
-            break;
-        case 'c':
-            break;
-        }
-
-        Main(user); // Volta ao menu principal
-    }
 
     static void ConsultarClientes(Cliente_ user)
     {
