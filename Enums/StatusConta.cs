@@ -10,7 +10,7 @@ namespace Trabalho_POO.Enums
     {
         EmAberto = 0,
         Atrasado = 1,
-        Pago = 2
+        FaturaOK = 2
 
     }
 }

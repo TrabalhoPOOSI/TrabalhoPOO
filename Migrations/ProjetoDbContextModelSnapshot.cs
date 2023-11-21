@@ -36,7 +36,7 @@ namespace Trabalho_POO.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Clientes", (string)null);
                 });
 
             modelBuilder.Entity("Trabalho_POO.Models.Conta", b =>
@@ -83,7 +83,7 @@ namespace Trabalho_POO.Migrations
 
                     b.HasIndex("clienteId");
 
-                    b.ToTable("Conta");
+                    b.ToTable("Conta", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Conta");
 
