@@ -36,7 +36,7 @@ namespace Trabalho_POO.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Trabalho_POO.Models.Conta", b =>
@@ -45,10 +45,11 @@ namespace Trabalho_POO.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("Consumo")
-                        .HasColumnType("Double (10,3)");
-
                     b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Endereco")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -62,16 +63,20 @@ namespace Trabalho_POO.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(14)");
 
+                    b.Property<double>("consumo")
+                        .HasColumnType("Double (10,3)");
+
                     b.Property<DateTime>("lançamento")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<double>("leitura")
+                        .HasColumnType("double");
+
+                    b.Property<double>("leituraAnterior")
+                        .HasColumnType("double");
+
                     b.Property<int>("status")
                         .HasColumnType("int");
-
-                    b.Property<string>("tarifa")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("tipo")
                         .HasColumnType("int");
@@ -83,7 +88,7 @@ namespace Trabalho_POO.Migrations
 
                     b.HasIndex("clienteId");
 
-                    b.ToTable("Conta", (string)null);
+                    b.ToTable("Conta");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Conta");
 
@@ -94,29 +99,12 @@ namespace Trabalho_POO.Migrations
                 {
                     b.HasBaseType("Trabalho_POO.Models.Conta");
 
-                    b.Property<double>("consumoEsgoto")
-                        .HasColumnType("double");
-
-                    b.Property<string>("tarifaEsgoto")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.HasDiscriminator().HasValue("ContaAgua");
                 });
 
             modelBuilder.Entity("Trabalho_POO.Models.ContaLuz", b =>
                 {
                     b.HasBaseType("Trabalho_POO.Models.Conta");
-
-                    b.Property<double?>("ConsumoMesAnterior")
-                        .HasColumnType("double");
-
-                    b.Property<string>("Endereco")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("TipoConta")
-                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("ContaLuz");
                 });

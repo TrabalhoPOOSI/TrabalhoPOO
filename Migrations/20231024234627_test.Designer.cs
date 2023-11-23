@@ -44,7 +44,7 @@ namespace Trabalho_POO.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("Consumo")
+                    b.Property<double>("consumo")
                         .HasColumnType("Double (10,3)");
 
                     b.Property<string>("Discriminator")

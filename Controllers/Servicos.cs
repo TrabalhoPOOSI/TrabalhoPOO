@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,23 +23,36 @@ namespace Trabalho_POO.Controllers
             char resp = char.Parse(Console.ReadLine());
             switch (resp)
             {
-                case 'a':
+                case 'a': 
                     using (var db = new ProjetoDbContext())
                     {
                         var contasLançadas = db.ContaAgua.Where(c => c.clienteId == user.Id).ToList();
                         Console.WriteLine($"Contas lançadas para o usuario {user.Nome}:");
-                        Console.WriteLine(" ID |      Lançamentos    |  Status  | Tarifa |  Consumo (L) | Total ");
+                        Console.WriteLine(" ID |      Lançamentos    |  Status  |  consumo (L) | Total ");
                         foreach (var item in contasLançadas)
                         {
 
-                            Console.WriteLine($"  {item.Id} | {item.lançamento} | {item.status.ToString()} |  {item.tarifa} | " +
-                                $"   {item.Consumo}   | R$ {item.Total} ");
+                            Console.WriteLine($"  {item.Id} | {item.lançamento} | {item.status.ToString()} |  " +
+                                $"   {item.consumo}   | R$ {item.Total} ");
+                        }
+                    }
+                    break;
+
+                case 'b':
+
+                    using (var db = new ProjetoDbContext())
+                    {
+                        Console.WriteLine($"Contas lançadas para o usuario {user.Nome}:");
+                        var contasLançadas = db.ContaLuz.Where(c => c.clienteId == user.Id).ToList();
+                        Console.WriteLine(" ID |      Lançamentos    |  Status  |  consumo (L) | Total ");
+                        foreach (var item in contasLançadas)
+                        {
+
+                            Console.WriteLine($"  {item.Id} | {item.lançamento} | {item.status.ToString()} |  " +
+                                $"   {item.consumo}   | R$ {item.Total} ");
                         }
 
                     }
-
-                    break;
-                case 'b':
                     break;
                 case 'c':
                     break;
@@ -53,11 +67,35 @@ namespace Trabalho_POO.Controllers
                 var client = db.Clientes.Where(c => c.Id == user.Id).FirstOrDefault();
                 Console.WriteLine("Informe o consumo de agua da conta:");
                 double consumoAgua = double.Parse(Console.ReadLine());
-                Console.WriteLine("Informe o consumo de esgoto da conta:");
-                double consumoEsgoto = double.Parse(Console.ReadLine());
+                Console.WriteLine("Informe o endereço da conta:");
+                string endereco = Console.ReadLine();
                 Console.WriteLine("informe a data de vencimento: (dd/mm/yyyy)");
                 DateOnly dateOnly = DateOnly.Parse(Console.ReadLine());
-                ContaAgua conta = new ContaAgua(consumoAgua, consumoEsgoto, dateOnly);
+                ContaAgua conta = new ContaAgua(consumoAgua, dateOnly, endereco);
+                Console.WriteLine("Qual o tipo de estabelecimento?");
+                Console.WriteLine("[a] Residencial. ");
+                Console.WriteLine("[b] Comercial. ");
+                char resp = char.Parse(Console.ReadLine());
+                Tipo_Consumidor tipo;
+                switch (resp)
+                {
+                    case 'a':
+                        tipo = Tipo_Consumidor.RESIDENCIAL;
+
+                        break;
+                    case 'b':
+                        tipo = Tipo_Consumidor.COMERCIAL;
+                        break;
+                    case 'c':
+                        tipo = Tipo_Consumidor.SOCIAL;
+                        break;
+
+                    default:
+                        tipo = Tipo_Consumidor.RESIDENCIAL;
+                        break;
+                }
+                conta.tipo = tipo;
+                conta.calculaTotal();
                 conta.cliente = client;
                 client.contas.Add(conta);
                 db.SaveChanges();
@@ -77,26 +115,26 @@ namespace Trabalho_POO.Controllers
                 Console.WriteLine("[a] Residencial. ");
                 Console.WriteLine("[b] Comercial. ");
                 char resp = char.Parse(Console.ReadLine());
-                TipoContaEnergia tipo;
+                Tipo_Consumidor tipo;
                 switch (resp)
                 {
                     case 'a':
-                        tipo = TipoContaEnergia.RESIDENCIAL;
+                        tipo = Tipo_Consumidor.RESIDENCIAL;
 
                         break;
                     case 'b':
-                        tipo = TipoContaEnergia.COMERCIAL;
+                        tipo = Tipo_Consumidor.COMERCIAL;
                         break;
 
                     default:
-                        tipo = TipoContaEnergia.RESIDENCIAL;
+                        tipo = Tipo_Consumidor.RESIDENCIAL;
                         break;
                 }
 
                 Console.WriteLine("informe a data de vencimento: (dd/mm/yyyy)");
                 DateOnly dateOnly = DateOnly.Parse(Console.ReadLine());
                 ContaLuz conta = new ContaLuz(consumoLuz, dateOnly, endereco);
-                conta.TipoConta = tipo;
+                conta.tipo = tipo;
                 conta.cliente = client;
                 client.contas.Add(conta);
                 db.SaveChanges();

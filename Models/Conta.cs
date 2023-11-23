@@ -18,7 +18,11 @@ namespace Trabalho_POO.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
+        public string Endereco { get; set; }
 
+        public double leitura { get; set; }
+        public double leituraAnterior { get; set; }
         [Required]
         public DateTime lançamento { get; set; }
         public DateOnly vencimento { get; set; }
@@ -27,11 +31,9 @@ namespace Trabalho_POO.Models
 
         public string clienteId { get; set; }
 
-        [StringLength(50)]
-        public string tarifa { get; set; }
         [Required]
         [Column(TypeName = "Double (10,3)")]
-        public double Consumo { get; set; }
+        public double consumo { get; set; }
         [Required]
         [Column(TypeName = "Decimal (10,2)")]
         public decimal Subtotal { get; set; }
@@ -41,12 +43,12 @@ namespace Trabalho_POO.Models
         public decimal Total { get; set; }
         public Tipo_Consumidor tipo { get; set; }
         public StatusConta status { get; set; }
-        public Conta(double consumo,DateOnly venc)
+        public Conta(DateOnly venc, string endereco)
         {
-            Consumo = consumo;
             status = StatusConta.EmAberto;
             lançamento = DateTime.Now;
             vencimento = venc;
+            Endereco = endereco;
         }
     }
 }

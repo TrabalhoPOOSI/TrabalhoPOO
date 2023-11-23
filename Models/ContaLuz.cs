@@ -13,24 +13,18 @@ namespace Trabalho_POO.Models
 {
     public class ContaLuz : Conta, TarifasLuz
     {
-        [Required]
-        public string Endereco { get; set; }
+        public double imposto = 0.03;
 
-        public double? ConsumoMesAnterior { get; set; }
 
-        [Required]
-        public TipoContaEnergia TipoConta { get; set; }
-
-        public ContaLuz(double consumo, DateOnly vencimento, string endereco) : base(consumo, vencimento)
+        public ContaLuz(double leitura, DateOnly vencimento, string endereco) : base(vencimento, endereco)
         {
-            Endereco = endereco;
             using (var db = new ProjetoDbContext())
             {
-                this.ConsumoMesAnterior = db.ContaLuz.Where(c => c.lançamento < DateTime.Now).Select(c => c.Consumo).FirstOrDefault();
+                this.leituraAnterior = db.ContaLuz.Where(c => c.lançamento < DateTime.Now).Select(c => c.consumo).FirstOrDefault();
             }
-            if (ConsumoMesAnterior != null)
-                consumo = (double)(consumo - ConsumoMesAnterior);
-            tarifa = TarifaLuz().ToString("F2");
+            if (leituraAnterior != null)
+                consumo = (double)(leitura - leituraAnterior);
+            consumo = (double)(leitura);
 
             // sem imposto
             Subtotal = (decimal)(consumo * TarifaLuz() + ContribuiçãoPublica());
@@ -42,14 +36,15 @@ namespace Trabalho_POO.Models
 
         public double TarifaLuz()
         {
-            if (TipoConta.ToString() == "RESIDENCIAL")
+            if (tipo.ToString() == "RESIDENCIAL")
             {
                 return 0.46;
             }
-            else
+            else if (tipo.ToString() == "COMERCIAL")
             {
                 return 0.41;
             }
+            else { return 0; }
         }
 
         public double ContribuiçãoPublica()
@@ -59,9 +54,9 @@ namespace Trabalho_POO.Models
 
         public double Imposto()
         {
-            if (Consumo >= 90)
+            if (consumo >= 90)
             {
-                if (TipoConta.ToString() == "RESIDENCIAL")
+                if (tipo.ToString() == "RESIDENCIAL")
                 {
                     return 1.4285;
                 }

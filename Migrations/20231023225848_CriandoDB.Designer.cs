@@ -47,7 +47,7 @@ namespace Trabalho_POO.Migrations
                     b.Property<string>("Cliente_Id")
                         .HasColumnType("varchar(14)");
 
-                    b.Property<double>("Consumo")
+                    b.Property<double>("consumo")
                         .HasColumnType("Double (10,3)");
 
                     b.Property<string>("Discriminator")
