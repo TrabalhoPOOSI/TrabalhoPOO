@@ -18,8 +18,7 @@ namespace Trabalho_POO.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
-        public string Endereco { get; set; }
+        public int enderecoId { get; set; } 
 
         public double leitura { get; set; }
         public double leituraAnterior { get; set; }
@@ -43,12 +42,11 @@ namespace Trabalho_POO.Models
         public decimal Total { get; set; }
         public Tipo_Consumidor tipo { get; set; }
         public StatusConta status { get; set; }
-        public Conta(DateOnly venc, string endereco)
+        public Conta(DateOnly venc)
         {
             status = StatusConta.EmAberto;
             lançamento = DateTime.Now;
             vencimento = venc;
-            Endereco = endereco;
         }
     }
 }

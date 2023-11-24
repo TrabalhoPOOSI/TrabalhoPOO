@@ -12,7 +12,7 @@ namespace Trabalho_POO.Models
     public class ContaAgua : Conta, TarifasDagua
     {
         public double COFINS = 0.03;
-        public ContaAgua(double leitura, DateOnly vencimento, string endereco) : base(vencimento, endereco)
+        public ContaAgua(double leitura, DateOnly vencimento) : base(vencimento)
         {
             this.leitura = leitura;
             this.status = StatusConta.EmAberto;
