@@ -20,13 +20,15 @@ namespace Trabalho_POO.Models
         public string password { get; set; }
 
         public ICollection<Conta>? contas { get; set; }
+        public ICollection<Enderecos>? enderecos { get; set; }
         public Cliente_(string nome, string id, string password)
         {
             Nome = nome;
             Id = id;
             this.password = password;
-            contas= new List<Conta>();
+            contas = new List<Conta>();
+            enderecos = new List<Enderecos>();
         }
-        
+
     }
 }

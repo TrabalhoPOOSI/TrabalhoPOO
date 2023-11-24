@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Trabalho_POO.Context;
 
@@ -10,9 +11,11 @@ using Trabalho_POO.Context;
 namespace Trabalho_POO.Migrations
 {
     [DbContext(typeof(ProjetoDbContext))]
-    partial class ProjetoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231124193855_criandoTabelasEnderecos")]
+    partial class criandoTabelasEnderecos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
