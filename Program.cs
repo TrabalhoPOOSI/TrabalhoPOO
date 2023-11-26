@@ -7,6 +7,7 @@ try
     Console.WriteLine("[b] não, desejo criar uma conta.");
     Console.WriteLine("[c] sair.");
     char resp = char.Parse(Console.ReadLine());
+    Console.Clear();
     switch (resp)
     {
         case 'a':

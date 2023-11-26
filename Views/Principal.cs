@@ -34,6 +34,9 @@ public static class Principal
                 Servicos.ConsultarContas(user);
                 break;
             case "4":
+                Relatorios.MenuRelatorios(user);
+                break;
+            case "5":
                 ConsultarClientes(user);
                 break;
             case "9":

@@ -16,11 +16,13 @@ namespace Trabalho_POO.Controllers
 
         public static void ConsultarContas(Cliente_ user)
         {
+            Console.Clear();
             Console.WriteLine("Escolha a opção desejada:");
             Console.WriteLine("[a] Contas de agua lançadas;");
             Console.WriteLine("[b] Contas de luz lançadas;");
             Console.WriteLine("[c] Todas as contas lançadas;");
             char resp = char.Parse(Console.ReadLine());
+            Console.Clear();
             switch (resp)
             {
                 case 'a':
@@ -60,6 +62,21 @@ namespace Trabalho_POO.Controllers
                     }
                     break;
                 case 'c':
+                    using (var db = new ProjetoDbContext())
+                    {
+                        var contasLançadas = db.Conta.Where(c => c.clienteId == user.Id).ToList();
+                        Console.WriteLine($"Contas lançadas para o usuario {user.Nome}:");
+                        Console.WriteLine(" ID  |      Lançamentos    |  Status   |  Consumo (M3)  | Total ");
+                        foreach (var item in contasLançadas) 
+                        {
+                            Console.WriteLine($"  {item.Id.ToString().PadRight(2)} | " +
+                                              $"{item.lançamento} | " +
+                                              $"{item.status.ToString().PadRight(9)} | " +
+                                              $"{item.consumo.ToString().PadRight(14)} | " +
+                                              $"R$ {item.Total}");
+                        }
+
+                    }
                     break;
             }
 
@@ -79,6 +96,7 @@ namespace Trabalho_POO.Controllers
                 Console.WriteLine("[a] Residencial. ");
                 Console.WriteLine("[b] Comercial. ");
                 char resp = char.Parse(Console.ReadLine());
+                Console.Clear();
                 Tipo_Consumidor tipo;
                 switch (resp)
                 {
@@ -98,6 +116,7 @@ namespace Trabalho_POO.Controllers
                         break;
                 }
                 conta.tipo = tipo;
+                conta.leituraAnterior = db.ContaAgua.Where(c=> c.clienteId == user.Id).Where(c => c.lançamento < DateTime.Now).Select(c => c.leitura).FirstOrDefault();
                 conta.calculaTotal();
                 conta.cliente = client;
                 conta.enderecoId = escolherEnderecos(client).id;
@@ -110,6 +129,7 @@ namespace Trabalho_POO.Controllers
         {
             using (var db = new ProjetoDbContext())
             {
+                Console.Clear();
                 var client = db.Clientes.Where(c => c.Id == user.Id).FirstOrDefault();
                 Console.WriteLine("Informe o consumo de Luz da conta:");
                 double consumoLuz = double.Parse(Console.ReadLine());
@@ -138,6 +158,7 @@ namespace Trabalho_POO.Controllers
                 ContaLuz conta = new ContaLuz(consumoLuz, dateOnly);
 
                 conta.tipo = tipo;
+                conta.leituraAnterior = db.ContaLuz.Where(c => c.clienteId == user.Id).Where(c => c.lançamento < DateTime.Now).Select(c => c.leitura).FirstOrDefault();
                 conta.calculaTotal();
                 conta.cliente = client;
                 conta.enderecoId = escolherEnderecos(client).id;
@@ -150,12 +171,14 @@ namespace Trabalho_POO.Controllers
         {
             using (var db = new ProjetoDbContext())
             {
+                Console.Clear();
                 Console.WriteLine("Digite o nome do cliente:");
                 string nome = Console.ReadLine();
                 Console.WriteLine("Digite o CPF/CNPJ do cliente:");
                 string ID = Console.ReadLine();
                 Console.WriteLine("informe a Senha:");
                 string ps = Console.ReadLine();
+                Console.Clear();
 
                 Cliente_ novoCliente = new Cliente_(nome, ID, ps);
                 novoCliente.enderecos.Add(CriarEndereco());
@@ -173,6 +196,7 @@ namespace Trabalho_POO.Controllers
         {
             using (var db = new ProjetoDbContext())
             {
+                Console.Clear();
                 Console.WriteLine("Lista de endereços cadastrados: ");
                 List<Enderecos> enderecos = db.Clientes.Where(c => c.Equals(cliente)).Select(c => c.enderecos).FirstOrDefault().ToList();
                 Console.WriteLine("ID | Logradouro                     | Numero | Bairro");
@@ -213,12 +237,14 @@ namespace Trabalho_POO.Controllers
 
             Console.WriteLine("Informe o bairro:");
             string bairro = Console.ReadLine();
+            Console.Clear();
             Enderecos enderecos = new Enderecos { numero = numero, bairro = bairro, logradouro = logradouro };
             return enderecos;
 
         }
         public static Enderecos CriarEndereco(Cliente_ cliente)
         {
+            Console.Clear();
             Console.WriteLine("Informe o logradouro:");
             string logradouro = Console.ReadLine();
 

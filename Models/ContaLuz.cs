@@ -18,15 +18,7 @@ namespace Trabalho_POO.Models
 
         public ContaLuz(double leitura, DateOnly vencimento) : base(vencimento)
         {
-            using (var db = new ProjetoDbContext())
-            {
-                this.leituraAnterior = db.ContaLuz.Where(c => c.lançamento < DateTime.Now).Select(c => c.consumo).FirstOrDefault();
-            }
-            if (leituraAnterior != null)
-                consumo = (double)(leitura - leituraAnterior);
-            consumo = (double)(leitura);
-
-            
+            this.leitura = leitura;
         }
 
         public double TarifaLuz()
@@ -47,17 +39,17 @@ namespace Trabalho_POO.Models
             return 13.25;
         }
 
-        public double Imposto()
+        public decimal Imposto()
         {
             if (consumo >= 90)
             {
                 if (tipo == Tipo_Consumidor.RESIDENCIAL)
                 {
-                    return 1.4285;
+                    return (decimal)1.4285;
                 }
                 else
                 {
-                    return 1.2195;
+                    return (decimal)1.2195;
                 }
             }
             else
@@ -69,11 +61,20 @@ namespace Trabalho_POO.Models
 
         public void calculaTotal()
         {
+
+            if (leituraAnterior != null)
+            {
+                consumo = (double)(leitura - leituraAnterior);
+            }
+            else
+            {
+            consumo = (double)(leitura);
+
+            }
+
             this.Subtotal = (decimal)(consumo * TarifaLuz() + ContribuiçãoPublica());
 
-            //com imposto
-
-            this.Total = (decimal) Subtotal * ((decimal)Imposto());
+            this.Total = Imposto() * Subtotal ;
         }
     }
 }
