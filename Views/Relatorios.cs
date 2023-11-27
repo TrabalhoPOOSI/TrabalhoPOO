@@ -13,10 +13,13 @@ namespace Trabalho_POO.Views
 
         public static void MenuRelatorios(Cliente_ cliente)
         {
-            Console.WriteLine($"Escolha a opção de realatorio:");
-            Console.WriteLine("[a] Valor medio pago em contas.");
-            Console.WriteLine("[b] Maior valor pago.");
-            Console.WriteLine("[c] Variação de consumo. ");
+            Console.WriteLine("              ===========================================================                   ");
+            Console.WriteLine($"              |           Escolha a opção de realatorio:                |                   ");
+            Console.WriteLine("              |           [a] Valor medio pago em contas.               |                   ");
+            Console.WriteLine("              |           [b] Maior valor pago.                         |                   ");
+            Console.WriteLine("              |           [c] Variação de consumo.                      |                   ");
+            Console.WriteLine("              ===========================================================                   ");
+
             char resp = char.Parse(Console.ReadLine());
 
             switch (resp)
@@ -47,9 +50,11 @@ namespace Trabalho_POO.Views
                     valorMedioLuz = db.ContaLuz.Where(c => c.clienteId == user.Id).Where(c => c != null).Select(c => c.Total).Average();
                 }
 
+                Console.WriteLine("              ===========================================================                   ");
+                Console.WriteLine($"               O valor medio pago nas contas de agua é R$ {valorMedioAgua.ToString("F2")}.");
+                Console.WriteLine($"               O valor medio pago nas contas de Luz é R$ {valorMedioLuz.ToString("F2")}.  ");
+                Console.WriteLine("              ===========================================================                   ");
 
-                Console.WriteLine($"O valor medio pago nas contas de agua é R$ {valorMedioAgua.ToString("F2")}.");
-                Console.WriteLine($"O valor medio pago nas contas de Luz é R$ {valorMedioLuz.ToString("F2")}.");
                 Principal.Main(user);
             }
         }
@@ -59,25 +64,32 @@ namespace Trabalho_POO.Views
             {
                 ContaAgua contaAgua = db.ContaAgua.OrderByDescending(c => c.consumo).First();
                 ContaLuz contaLuz = db.ContaLuz.OrderByDescending(c => c.consumo).First();
+                Console.WriteLine("              ===========================================================                    ");
+                Console.WriteLine($"               Maior Consomo de agua foi em {contaAgua.lançamento.ToString("dd/MM/yyyy")}.");
+                Console.WriteLine($"               Consomo de agua foi {contaAgua.consumo}.                                   ");
+                Console.WriteLine("              ===========================================================                    ");
+                Console.WriteLine($"               Maior Consomo de luz foi em {contaLuz.lançamento.ToString("dd/MM/yyyy")}.  ");
+                Console.WriteLine($"               Consomo de luz foi {contaLuz.consumo}.                                     ");
+                Console.WriteLine("              ===========================================================                   ");
 
-                Console.WriteLine($"Maior Consomo de agua foi em {contaAgua.lançamento.ToString("dd/MM/yyyy")}.");
-                Console.WriteLine($"Consomo de agua foi {contaAgua.consumo}.");
-                Console.WriteLine();
-                Console.WriteLine($"Maior Consomo de luz foi em {contaLuz.lançamento.ToString("dd/MM/yyyy")}.");
-                Console.WriteLine($"Consomo de luz foi {contaLuz.consumo}.");
                 Principal.Main(user);
             }
         }
 
         public static void variacaoConta(Cliente_ user)
         {
-            Console.WriteLine("Escolha o tipo de conta:");
-            Console.WriteLine("[a] Conta de Agua.");
-            Console.WriteLine("[b] Conta de Luz.");
+            Console.WriteLine("              ===========================================================                   ");
+            Console.WriteLine("              |              Escolha o tipo de conta:                   |                   ");
+            Console.WriteLine("              |              [a] Conta de Agua.                         |                   ");
+            Console.WriteLine("              |              [b] Conta de Luz.                          |                   ");
+            Console.WriteLine("              ===========================================================                   ");
+
 
             char tipoConta = char.Parse(Console.ReadLine());
+            Console.WriteLine("              ===========================================================                   ");
+            Console.WriteLine("              |Informe dois meses para calcular a variação: (dd/mm/yyyy)|                   ");
+            Console.WriteLine("              ===========================================================                   ");
 
-            Console.WriteLine("Informe dois meses para calcular a variação: (dd/mm/yyyy) ");
             DateTime data1 = DateTime.Parse(Console.ReadLine());
             DateTime data2 = DateTime.Parse(Console.ReadLine());
             double consumo = 0;
@@ -99,8 +111,11 @@ namespace Trabalho_POO.Views
                     }
                     break;
             }
-            Console.WriteLine($"O consumo medio é de {consumo.ToString("F3")};" +
-                $"variou em reais R$ {valor.ToString("F2")}");
+            Console.WriteLine("              ===========================================================                   ");
+            Console.WriteLine($"                  O consumo medio é de {consumo.ToString("F3")}.                         ");
+            Console.WriteLine($"                  Variou em reais R$ {valor.ToString("F2")}.                              ");
+            Console.WriteLine("              ===========================================================                   ");
+
 
             Principal.Main(user);
         }

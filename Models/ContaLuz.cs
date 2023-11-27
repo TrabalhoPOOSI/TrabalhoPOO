@@ -62,19 +62,25 @@ namespace Trabalho_POO.Models
         public void calculaTotal()
         {
 
-            if (leituraAnterior != null)
+            if (leituraAnterior == null || leituraAnterior == 0)
             {
-                consumo = (double)(leitura - leituraAnterior);
+                consumo = (double)(leitura);
             }
             else
             {
-            consumo = (double)(leitura);
-
+                if (leitura < leituraAnterior)
+                {
+                    consumo = (double)(leitura - leituraAnterior) * -1;
+                }
+                else
+                {
+                    consumo = (double)(leitura - leituraAnterior);
+                }
             }
 
             this.Subtotal = (decimal)(consumo * TarifaLuz() + ContribuiçãoPublica());
 
-            this.Total = Imposto() * Subtotal ;
+            this.Total = Imposto() == 0 ? Subtotal : Imposto() * Subtotal;
         }
     }
 }

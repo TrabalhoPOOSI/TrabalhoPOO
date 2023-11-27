@@ -14,23 +14,35 @@ namespace Trabalho_POO.Controllers
         {
             using (var db = new ProjetoDbContext())
             {
-                Console.WriteLine("Bem-vindo ao Sistema de Login!");
+                Console.WriteLine("              ===========================================================                   ");
+                Console.WriteLine("              |           Bem-vindo ao Sistema de Login!                |                    ");
+                Console.WriteLine("              ===========================================================                   ");
 
                 // Solicitação de entrada do usuário
-                Console.Write("Digite o CPF ou CNPJ de usuário: ");
+                Console.WriteLine("              ===========================================================                 ");
+                Console.WriteLine("              |          Digite o CPF ou CNPJ de usuário:               |                 ");
+                Console.WriteLine("              ===========================================================                   ");
+
                 string userId = Console.ReadLine();
                 Cliente_ user = db.Clientes.Where(c => c.Id == userId).FirstOrDefault();
-                Console.WriteLine("Bem-vindo, " + user.Nome + ".");
-                Console.Write("Digite a senha: ");
+                Console.WriteLine("              ===========================================================                   ");
+                Console.WriteLine("                        Bem-vindo, " + user.Nome + "!                               ");
+                Console.WriteLine("              ===========================================================                   ");
+                Console.WriteLine("              |            Digite a senha:                              |                   ");
+                Console.WriteLine("              ===========================================================                   ");
+
                 string senhaDigitada = LerSenha();
                 // Verificação das credenciais
                 if (senhaDigitada == user.password)
                 {
+                    Console.Clear();
                     Principal.Main(user);
                 }
                 else
                 {
-                    Console.WriteLine("Login falhou. Verifique suas credenciais.");
+                    Console.WriteLine("              ===========================================================                   ");
+                    Console.WriteLine("              |     Login falhou. Verifique suas credenciais.           |                   ");
+                    Console.WriteLine("              ===========================================================                   ");
 
                 }
             }
