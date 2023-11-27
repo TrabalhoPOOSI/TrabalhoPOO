@@ -10,6 +10,6 @@ namespace Trabalho_POO.Interfaces
     {
         public double TarifaLuz();
         public double ContribuiçãoPublica();
-        public double Imposto();
+        public decimal Imposto();
     }
 }

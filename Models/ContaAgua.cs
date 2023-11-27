@@ -16,11 +16,6 @@ namespace Trabalho_POO.Models
         {
             this.leitura = leitura;
             this.status = StatusConta.EmAberto;
-            using (var db = new ProjetoDbContext())
-            {
-                this.leituraAnterior = db.ContaAgua.Where(c => c.lançamento < DateTime.Now).Select(c => c.leitura).FirstOrDefault();
-            }
-            this.consumo = leituraAnterior != null ? (double)(leitura - leituraAnterior) : leitura;
             this.tipo = Tipo_Consumidor.RESIDENCIAL;
         }
 
@@ -137,7 +132,7 @@ namespace Trabalho_POO.Models
             double tarifa = 0;
             if (this.tipo == Tipo_Consumidor.RESIDENCIAL)
             {
-                if (consumoAux >=10)
+                if (consumoAux >= 10)
                 {
                     tarifa += 10 * 1.122;
                     consumoAux -= 10;
@@ -148,7 +143,7 @@ namespace Trabalho_POO.Models
                     consumoAux = 0;
 
                 }
-                if (consumoAux >=5)
+                if (consumoAux >= 5)
                 {
                     tarifa += 5 * 2.724;
                     consumoAux -= 5;
@@ -232,6 +227,15 @@ namespace Trabalho_POO.Models
 
         public void calculaTotal()
         {
+            ;
+            if (leituraAnterior == null || leituraAnterior == 0)
+            {
+                this.consumo = leitura < leituraAnterior ? 0: leitura;
+            }
+            else
+            {
+                this.consumo += leitura < leituraAnterior ? leituraAnterior + leitura : leitura - leituraAnterior;
+            }
             this.Subtotal = (decimal)(TarifaEsgoto() + TarifaAgua());
             this.Total = Subtotal + (Subtotal * (decimal)COFINS);
         }

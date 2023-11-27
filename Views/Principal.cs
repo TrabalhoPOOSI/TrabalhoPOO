@@ -11,14 +11,17 @@ public static class Principal
 {
     public static void Main(Cliente_ user)
     {
-        Console.WriteLine($"Bem-vindo, {user.Nome} ao nosso Menu!");
-        Console.WriteLine("-------------------------------");
-        Console.WriteLine("O que você gostaria de fazer?");
-        Console.WriteLine("1. Cadastra uma conta água");
-        Console.WriteLine("2. Cadastra uma conta luz");
-        Console.WriteLine("3. Consultar contas");
-        Console.WriteLine("4. Relatorios personalizados");
-        Console.WriteLine("9. Sair");
+        Console.WriteLine();
+        Console.WriteLine("              ============================================================                    ");
+        Console.WriteLine($"                     Bem-vindo, {user.Nome} ao nosso Menu!                              ");
+        Console.WriteLine("              |----------------------------------------------------------|                    ");
+        Console.WriteLine("              |         O que você gostaria de fazer?                    |                    ");
+        Console.WriteLine("              |         1. Cadastra uma conta água                       |                    ");
+        Console.WriteLine("              |         2. Cadastra uma conta luz                        |                    ");
+        Console.WriteLine("              |         3. Consultar contas                              |                    ");
+        Console.WriteLine("              |         4. Relatorios personalizados                     |                    ");
+        Console.WriteLine("              |         9. Sair                                          |                    ");
+        Console.WriteLine("              ============================================================                    ");
 
         string escolha = Console.ReadLine();
 
@@ -34,10 +37,16 @@ public static class Principal
                 Servicos.ConsultarContas(user);
                 break;
             case "4":
+                Relatorios.MenuRelatorios(user);
+                break;
+            case "5":
                 ConsultarClientes(user);
                 break;
             case "9":
-                Console.WriteLine("Obrigado por visitar nosso app. Até mais!");
+                Console.WriteLine("              ===========================================================                   ");
+                Console.WriteLine("              |      Obrigado por visitar nosso app. Até mais!          |                   ");
+                Console.WriteLine("              ===========================================================                   ");
+
                 break;
             default:
                 Console.WriteLine("Opção inválida. Por favor, escolha uma opção válida.");
