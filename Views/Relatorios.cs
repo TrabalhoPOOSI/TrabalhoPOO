@@ -62,17 +62,29 @@ namespace Trabalho_POO.Views
         {
             using (var db = new ProjetoDbContext())
             {
-                ContaAgua contaAgua = db.ContaAgua.OrderByDescending(c => c.consumo).First();
-                ContaLuz contaLuz = db.ContaLuz.OrderByDescending(c => c.consumo).First();
-                Console.WriteLine("              ===========================================================                    ");
-                Console.WriteLine($"               Maior Consomo de agua foi em {contaAgua.lançamento.ToString("dd/MM/yyyy")}.");
-                Console.WriteLine($"               Consomo de agua foi {contaAgua.consumo}.                                   ");
-                Console.WriteLine("              ===========================================================                    ");
-                Console.WriteLine($"               Maior Consomo de luz foi em {contaLuz.lançamento.ToString("dd/MM/yyyy")}.  ");
-                Console.WriteLine($"               Consomo de luz foi {contaLuz.consumo}.                                     ");
-                Console.WriteLine("              ===========================================================                   ");
+                try
+                {
+                    ContaAgua contaAgua = db.ContaAgua.OrderByDescending(c => c.consumo).First();
+                    ContaLuz contaLuz = db.ContaLuz.OrderByDescending(c => c.consumo).First();
+                    Console.WriteLine("              ===========================================================                    ");
+                    Console.WriteLine($"               Maior Consomo de agua foi em {contaAgua.lançamento.ToString("dd/MM/yyyy")}.");
+                    Console.WriteLine($"               Consomo de agua foi {contaAgua.consumo}.                                   ");
+                    Console.WriteLine("              ===========================================================                    ");
+                    Console.WriteLine($"               Maior Consomo de luz foi em {contaLuz.lançamento.ToString("dd/MM/yyyy")}.  ");
+                    Console.WriteLine($"               Consomo de luz foi {contaLuz.consumo}.                                     ");
+                    Console.WriteLine("              ===========================================================                   ");
+                }
+                catch (Exception ex)
+                {
+       
+                    Console.WriteLine("                      Erro ao procurar o maior valor, certifique-se de ter ao menos uma conta de agua e luz  ");
 
-                Principal.Main(user);
+                }
+
+                finally
+                {
+                    Principal.Main(user);
+                }
             }
         }
 

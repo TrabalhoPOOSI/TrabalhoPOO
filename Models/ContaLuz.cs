@@ -70,7 +70,7 @@ namespace Trabalho_POO.Models
             {
                 if (leitura < leituraAnterior)
                 {
-                    consumo = (double)(leitura - leituraAnterior) * -1;
+                    consumo = leitura;
                 }
                 else
                 {

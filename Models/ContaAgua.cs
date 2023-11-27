@@ -230,11 +230,15 @@ namespace Trabalho_POO.Models
             ;
             if (leituraAnterior == null || leituraAnterior == 0)
             {
-                this.consumo = leitura < leituraAnterior ? 0: leitura;
+                this.consumo = leitura < leituraAnterior ? 0 : leitura;
             }
             else
             {
-                this.consumo += leitura < leituraAnterior ? leituraAnterior + leitura : leitura - leituraAnterior;
+                this.consumo = leitura - leituraAnterior;
+                if (consumo < 0)
+                {
+                    this.consumo = leitura;
+                }
             }
             this.Subtotal = (decimal)(TarifaEsgoto() + TarifaAgua());
             this.Total = Subtotal + (Subtotal * (decimal)COFINS);

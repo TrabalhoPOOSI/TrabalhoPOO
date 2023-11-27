@@ -1,6 +1,5 @@
 ﻿using Trabalho_POO.Controllers;
-try
-{
+
     Console.WriteLine();
     Console.WriteLine();
     Console.WriteLine();
@@ -11,6 +10,7 @@ try
     Console.WriteLine("              |    [b] não, desejo criar uma conta.                     |             ");
     Console.WriteLine("              |    [c] sair.                                            |             ");
     Console.WriteLine("              ===========================================================                   ");
+try { 
     char resp = char.Parse(Console.ReadLine());
     Console.Clear();
     switch (resp)
@@ -28,4 +28,5 @@ try
 catch (Exception ex)
 {
     Console.WriteLine(ex.Message);
+   Servicos.CriarCliente();
 }

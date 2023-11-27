@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Trabalho\\trabalho\\TrabalhoPOO\\Trabalho POO.csproj": {}
+    "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Nova pasta\\TrabalhoPOO\\Trabalho POO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Trabalho\\trabalho\\TrabalhoPOO\\Trabalho POO.csproj": {
+    "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Nova pasta\\TrabalhoPOO\\Trabalho POO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Trabalho\\trabalho\\TrabalhoPOO\\Trabalho POO.csproj",
+        "projectUniqueName": "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Nova pasta\\TrabalhoPOO\\Trabalho POO.csproj",
         "projectName": "Trabalho POO",
-        "projectPath": "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Trabalho\\trabalho\\TrabalhoPOO\\Trabalho POO.csproj",
+        "projectPath": "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Nova pasta\\TrabalhoPOO\\Trabalho POO.csproj",
         "packagesPath": "C:\\Users\\davio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Trabalho\\trabalho\\TrabalhoPOO\\obj\\",
+        "outputPath": "C:\\Users\\davio\\OneDrive\\Área de Trabalho\\Nova pasta\\TrabalhoPOO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\davio\\AppData\\Roaming\\NuGet\\NuGet.Config",

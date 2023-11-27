@@ -11,7 +11,7 @@ namespace Trabalho_POO.Context
     public class ProjetoDbContext: DbContext
     {
         // string para  conectar o banco local
-        //private const string connectionString = "Server=localhost;Database=ProjetoPOO;Uid=root;Pwd=Droit*18;";
+       //private const string connectionString = "Server=localhost;Database=ProjetoPOO;Uid=root;Pwd=Droit*18;";
 
         // string para conectar ao banco azure
         private const string connectionString = "Server=trabalho-poo.mysql.database.azure.com;Database=trabalho-poo;Uid=trabalho;Pwd=Puc@2023;";

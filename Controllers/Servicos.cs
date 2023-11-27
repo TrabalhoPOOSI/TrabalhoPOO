@@ -259,7 +259,11 @@ namespace Trabalho_POO.Controllers
                         break;
 
                     default:
-                        return CriarEndereco(cliente);
+                        Console.WriteLine("              ===========================================================                   ");
+                        Console.WriteLine("              |       Opção invalida                                    |                   ");
+                        Console.WriteLine("              ===========================================================                   ");
+
+                        return escolherEnderecos(cliente);
                         break;
                 }
             }

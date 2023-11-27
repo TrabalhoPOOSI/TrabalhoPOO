@@ -25,25 +25,36 @@ namespace Trabalho_POO.Controllers
 
                 string userId = Console.ReadLine();
                 Cliente_ user = db.Clientes.Where(c => c.Id == userId).FirstOrDefault();
-                Console.WriteLine("              ===========================================================                   ");
-                Console.WriteLine("                        Bem-vindo, " + user.Nome + "!                               ");
-                Console.WriteLine("              ===========================================================                   ");
-                Console.WriteLine("              |            Digite a senha:                              |                   ");
-                Console.WriteLine("              ===========================================================                   ");
-
-                string senhaDigitada = LerSenha();
-                // Verificação das credenciais
-                if (senhaDigitada == user.password)
+                if (user != null)
                 {
-                    Console.Clear();
-                    Principal.Main(user);
+                    Console.WriteLine("              ===========================================================                   ");
+                    Console.WriteLine("                        Bem-vindo, " + user.Nome + "!                               ");
+                    Console.WriteLine("              ===========================================================                   ");
+                    Console.WriteLine("              |            Digite a senha:                              |                   ");
+                    Console.WriteLine("              ===========================================================                   ");
+
+                    string senhaDigitada = LerSenha();
+                    // Verificação das credenciais
+                    if (senhaDigitada == user.password)
+                    {
+                        Console.Clear();
+                        Principal.Main(user);
+                    }
+                    else
+                    {
+                        Console.WriteLine("              ===========================================================                   ");
+                        Console.WriteLine("              |     Login falhou. Verifique suas credenciais.           |                   ");
+                        Console.WriteLine("              ===========================================================                   ");
+                        Servicos.CriarCliente();
+
+                    }
                 }
                 else
                 {
                     Console.WriteLine("              ===========================================================                   ");
                     Console.WriteLine("              |     Login falhou. Verifique suas credenciais.           |                   ");
                     Console.WriteLine("              ===========================================================                   ");
-
+                    Servicos.CriarCliente();
                 }
             }
         }
